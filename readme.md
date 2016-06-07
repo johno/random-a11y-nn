@@ -1,5 +1,7 @@
 # random-a11y-nn [![Build Status](https://secure.travis-ci.org/johnotander/random-a11y-nn.png?branch=master)](https://travis-ci.org/johnotander/random-a11y-nn) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
+__Work in progress__
+
 Random a11y color combination neural network
 
 ## Installation
