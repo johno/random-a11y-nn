@@ -1,39 +1,43 @@
 'use strict'
 
+var fs = require('fs')
 var got = require('got')
 var brain = require('brain.js')
 
 var processColors = require('./util/process-colors')
+var combos = JSON.parse(fs.readFileSync('data.json', 'utf8'))
 
 module.exports = function randomA11yNn (cb) {
-  got('http://randoma11y.com/combos?per_page=1000')
-    .then(function (response) {
-      var body = JSON.parse(response.body)
-      var trainingData = body.map(function (combo) {
-        var upOut = combo.up / combo.votes_count
-        var downOut = combo.down / combo.votes_count
+  combos = Object.keys(combos).map(function (c) { return combos[c] })
 
-        var input = processColors(combo.color_one, combo.color_two)
+  var trainingData = combos.map(function (combo) {
+    var upOut = combo.up / combo.votes_count
+    var downOut = combo.down / combo.votes_count
 
-        return {
-          input: input,
-          output: {
-            up: upOut,
-            down: downOut
-          }
-        }
-      })
+    var input = processColors(combo.color_one, combo.color_two)
 
-      var net = new brain.NeuralNetwork()
-      net.train(trainingData, {
-        log: true,
-        logPeriod: 10000,
-        errorThresh: 0.05,
-        iterations: 1000000
-      })
-      cb(net)
-    })
-    .catch(function (err) {
-      console.log(err)
-    })
+    return {
+      input: input,
+      output: {
+        up: upOut,
+        down: downOut
+      }
+    }
+  })
+
+  fs.writeFileSync('training-data.json', JSON.stringify(trainingData))
+  console.log('Beginning training on ' + trainingData.length + 'total combos')
+
+  var net = new brain.NeuralNetwork()
+  net.train(trainingData, {
+    log: true,
+    logPeriod: 10000,
+    errorThresh: 0.05,
+    iterations: 1000000
+  })
+
+  fs.writeFileSync('net.json', net.toJSON())
+  console.log('Finished training, net written to file as JSON')
+
+  return net
 }
