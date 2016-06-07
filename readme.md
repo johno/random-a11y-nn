@@ -13,7 +13,17 @@ npm install --save random-a11y-nn
 ```javascript
 var randomA11yNn = require('random-a11y-nn')
 
-randomA11yNn()  // => true
+var net = randomA11yNn(
+  [
+    {
+      color_one: '#fff',
+      color_two: '#444',
+      votes: [...]
+    }, ...
+  ]
+)
+
+net.run('#fafafa', '#555') // => { up: .99, down: 0.004 }
 ```
 
 ## License
