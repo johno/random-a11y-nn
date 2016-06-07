@@ -1,0 +1,22 @@
+{
+  "name": "random-a11y-nn",
+  "description": "Random a11y color combination neural network",
+  "author": "John Otander",
+  "version": "0.1.0",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": "johnotander/random-a11y-nn",
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "brain.js": "^0.7.0"
+  },
+  "devDependencies": {
+    "ava": "*"
+  }
+}
