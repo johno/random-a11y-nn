@@ -1,4 +1,4 @@
-(1..45).collect.each do |i|
+(46..450).collect.each do |i|
   command = "node get-vote-data.js #{i}"
   puts command
   system command

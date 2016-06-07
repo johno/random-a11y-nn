@@ -31,9 +31,9 @@ module.exports = function randomA11yNn (cb) {
   var net = new brain.NeuralNetwork()
   net.train(trainingData, {
     log: true,
-    logPeriod: 10000,
-    errorThresh: 0.05,
-    iterations: 1000000
+    logPeriod: 1000,
+    errorThresh: 0.1,
+    iterations: 100000
   })
 
   fs.writeFileSync('net.json', net.toJSON())
