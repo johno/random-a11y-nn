@@ -36,7 +36,7 @@ module.exports = function randomA11yNn (cb) {
     iterations: 100000
   })
 
-  fs.writeFileSync('net.json', net.toJSON())
+  fs.writeFileSync('net.json', JSON.stringify(net.toJSON()))
   console.log('Finished training, net written to file as JSON')
 
   return net
